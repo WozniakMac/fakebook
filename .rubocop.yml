@@ -1,6 +1,9 @@
 inherit_from: .rubocop_todo.yml
 require: rubocop-rspec
 
+Style/Documentation:
+  Exclude:
+    - '**/*.rb'
 
 RSpec/InstanceVariable:
   Exclude:
@@ -13,3 +16,10 @@ RSpec/MultipleExpectations:
 Lint/ScriptPermission:
   Exclude:
     - 'bin/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - 'db/schema.rb'
