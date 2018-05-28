@@ -9,3 +9,7 @@ RSpec/InstanceVariable:
 RSpec/MultipleExpectations:
   Exclude:
     - 'spec/views/**/*.rb'
+
+Lint/ScriptPermission:
+  Exclude:
+    - 'bin/**/*'

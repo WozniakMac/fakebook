@@ -6,7 +6,7 @@ require_relative 'config/application'
 Rails.application.load_tasks
 
 RuboCop::RakeTask.new(:rubocop) do |t|
-  t.options = ['--display-cop-names']
+  t.options = ['--display-cop-names', '--cache', 'false']
 end
 
 task default: [:rubocop, :spec]
