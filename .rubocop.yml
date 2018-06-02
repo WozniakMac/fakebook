@@ -23,3 +23,6 @@ Metrics/BlockLength:
     - '**/*.rake'
     - 'spec/**/*.rb'
     - 'db/schema.rb'
+
+Layout/EndOfLine:
+  EnforcedStyle: lf
