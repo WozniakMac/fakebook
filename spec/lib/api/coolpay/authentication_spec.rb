@@ -15,19 +15,19 @@ describe Api::Coolpay::Authentication do
     let(:username) { 'username' }
     let(:apitoken) { 'apitoken' }
 
-    context 'successful login' do
+    context 'when successful login' do
       it 'returns body' do
-        expect(Api::Coolpay::Connection).to receive(:api).and_return(api)
-        expect(api).to receive(:post).and_return(response)
+        allow(Api::Coolpay::Connection).to receive(:api).and_return(api)
+        allow(api).to receive(:post).and_return(response)
 
         expect(authentication.login(username, apitoken)).to eq(body)
       end
     end
 
-    context 'unsuccessful login' do
+    context 'when unsuccessful login' do
       it 'returns body' do
-        expect(Api::Coolpay::Connection).to receive(:api).and_return(api)
-        expect(api).to receive(:post).and_return(invalid_response)
+        allow(Api::Coolpay::Connection).to receive(:api).and_return(api)
+        allow(api).to receive(:post).and_return(invalid_response)
 
         expect(authentication.login(username, apitoken)).to eq(
           'error' => 'Unsuccessful login'
