@@ -41,7 +41,7 @@ describe Api::Coolpay::Connection do
     let(:path) { '/path' }
     let(:token) { 'token' }
     let(:body) { { 'body' => 'body' } }
-    let(:response) { instance_double('Faraday::Response', body: body.to_json, status: 200) }
+    let(:response) { instance_double('Faraday::Response', body: body, status: 200) }
     let(:api) { instance_double('Faraday::Connection') }
 
     before do
@@ -59,7 +59,7 @@ describe Api::Coolpay::Connection do
     let(:path) { '/path' }
     let(:token) { 'token' }
     let(:body) { { 'body' => 'body' } }
-    let(:response) { instance_double('Faraday::Response', body: body.to_json, status: 200) }
+    let(:response) { instance_double('Faraday::Response', body: body, status: 200) }
     let(:api) { instance_double('Faraday::Connection') }
 
     before do

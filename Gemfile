@@ -11,6 +11,8 @@ gem 'slim-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'omniauth-google-oauth2'
 gem 'faraday'
+gem 'faraday_middleware'
+gem 'faraday-conductivity'
 
 gem 'redcarpet'
 gem 'coffee-rails', '~> 4.2'

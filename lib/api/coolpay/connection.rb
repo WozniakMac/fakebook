@@ -1,22 +1,30 @@
 require 'faraday'
+require 'faraday_middleware'
+require 'faraday/conductivity'
+require 'json'
 
 module Api
   module Coolpay
     class Connection
-      BASE_URL = 'https://private-anon-32a3a8c694-coolpayapi.apiary-mock.com/api'.freeze
+      BASE_URL = 'https://coolpay.herokuapp.com/'.freeze
 
       def self.api(token = nil)
         Faraday.new(url: BASE_URL) do |faraday|
-          faraday.response :logger
-          faraday.adapter Faraday.default_adapter
+          faraday.request :json
+          faraday.response :json
           faraday.headers['Content-Type'] = 'application/json'
           faraday.headers['Authorization'] = token if token.present?
+          faraday.use :extended_logging
+          faraday.adapter Faraday.default_adapter
         end
       end
 
       def self.get(path, query = {}, token = nil)
         response = api(token).get(path, query)
-        [JSON.parse(response.body), response.status]
+
+        [response.body, response.status]
+      rescue Faraday::ParsingError
+        [{ 'error' => 'Invalid response' }, 404]
       end
 
       def self.post(path, body = {}, token = nil)
@@ -24,7 +32,11 @@ module Api
           req.url path
           req.body = body
         end
-        [JSON.parse(response.body), response.status]
+
+        [response.body, response.status]
+      rescue Faraday::ParsingError => e
+        puts e
+        [{ 'error' => 'Invalid response' }, 404]
       end
     end
   end

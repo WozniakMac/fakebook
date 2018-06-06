@@ -1,18 +1,35 @@
-# require 'spec_helper'
-# require 'api/coolpay/authentication'
-# require 'api/coolpay/connection'
+require 'spec_helper'
+require 'api/coolpay/authentication'
+require 'api/coolpay/connection'
 
-# describe Api::Coolpay::Authentication do
-#   subject(:authentication) { described_class }
+describe Api::Coolpay::Authentication do
+  subject(:authentication) { described_class }
 
-#   describe '.login' do
-#     let(:api) { instance_double('api') }
+  describe '.login' do
+    let(:query_body) { { 'a' => 'b' } }
+    let(:path) { '/path' }
+    let(:body) { { 'body' => 'body' } }
+    let(:response) { [body, 200] }
+    let(:invalid_response) { [body, 404] }
+    let(:username) { 'username' }
+    let(:apitoken) { 'apitoken' }
 
-#     before do
-#       allow(Api::Coolpay::Connection).to receive(:api).and_return(result)
-#     end
+    context 'when successful login' do
+      it 'returns body' do
+        allow(Api::Coolpay::Connection).to receive(:post).and_return(response)
 
-#     it 'makes request for authentication token' do
-#     end
-#   end
-# end
+        expect(authentication.login(username, apitoken)).to eq(body)
+      end
+    end
+
+    context 'when unsuccessful login' do
+      it 'returns error' do
+        allow(Api::Coolpay::Connection).to receive(:post).and_return(invalid_response)
+
+        expect(authentication.login(username, apitoken)).to eq(
+          'error' => 'Unsuccessful login'
+        )
+      end
+    end
+  end
+end
