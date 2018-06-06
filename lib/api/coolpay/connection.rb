@@ -30,7 +30,7 @@ module Api
       def self.post(path, body = {}, token = nil)
         response = api(token).post do |req|
           req.url path
-          req.body = body.to_json
+          req.body = body
         end
 
         [response.body, response.status]
