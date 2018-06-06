@@ -70,6 +70,10 @@ GEM
       railties (>= 3.0.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
+    faraday-conductivity (0.3.1)
+      faraday (~> 0.8)
+    faraday_middleware (0.12.2)
+      faraday (>= 0.7.4, < 1.0)
     ffi (1.9.23)
     ffi (1.9.23-x64-mingw32)
     formatador (0.2.5)
@@ -299,6 +303,8 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   factory_bot_rails
   faraday
+  faraday-conductivity
+  faraday_middleware
   guard-bundler
   guard-rspec
   guard-rubocop

@@ -5,8 +5,8 @@ module Api
   module Coolpay
     class Authentication
       def self.login(username, apikey)
-        body, status = Api::Coolpay::Connection.api.post(
-          '/login',
+        body, status = Api::Coolpay::Connection.post(
+          '/api/login',
           'username' => username,
           'apikey' => apikey
         )

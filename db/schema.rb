@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_180_528_135_832) do
+ActiveRecord::Schema.define(version: 20_180_603_122_209) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
+
+  create_table 'credentials', force: :cascade do |t|
+    t.string 'username'
+    t.string 'apikey'
+    t.bigint 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_credentials_on_user_id'
+  end
 
   create_table 'users', force: :cascade do |t|
     t.string 'provider'
@@ -23,4 +32,6 @@ ActiveRecord::Schema.define(version: 20_180_528_135_832) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end
+
+  add_foreign_key 'credentials', 'users'
 end
