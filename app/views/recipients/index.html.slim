@@ -1,0 +1,19 @@
+h1 Listing recipients
+
+table
+  thead
+    tr
+      th Name
+      th
+      th
+      th
+
+  tbody
+    - @recipients.each do |recipient|
+      tr
+        td = recipient.name
+
+
+br
+
+= link_to 'New Recipient', new_recipient_path

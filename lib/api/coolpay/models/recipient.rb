@@ -10,19 +10,17 @@ module Api
         URL = '/api/recipients'.freeze
 
         def self.all(token)
-          recipients = APi::Coolpay::Connection.get(URL, {}, token)
+          body, = Api::Coolpay::Connection.get(URL, {}, token)
+          recipients = body['recipients'] || [] if body.is_a?(Hash)
+          recipients = [] if body.is_a?(String)
 
           recipients.map do |recipient|
-            Recipient.new(recipient)
+            Recipient.new(token, recipient)
           end
         end
 
-        def self.find(id, token)
-          all(token).find { |recipient| recipient.id == id }
-        end
-
         def save
-          APi::Coolpay::Connection.post(URL, { 'name' => name }, @token)
+          Api::Coolpay::Connection.post(URL, { 'recipient' => { 'name' => name } }, @token)
         end
       end
     end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :recipients, only: [:index, :new, :create]
   root to: 'home#index'
 
   resources :credentials

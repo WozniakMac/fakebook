@@ -5,6 +5,7 @@ module Api
 
       def initialize(token, args = {})
         @token = token
+        @errors = []
 
         args.each do |name, value|
           attr_name = name.to_s.underscore

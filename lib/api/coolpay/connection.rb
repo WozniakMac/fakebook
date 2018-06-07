@@ -6,7 +6,7 @@ require 'json'
 module Api
   module Coolpay
     class Connection
-      BASE_URL = 'https://coolpay.herokuapp.com/'.freeze
+      BASE_URL = 'https://private-anon-32a3a8c694-coolpayapi.apiary-mock.com/'.freeze
 
       def self.api(token = nil)
         Faraday.new(url: BASE_URL) do |faraday|
