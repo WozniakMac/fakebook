@@ -5,20 +5,12 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version: 2.5.1
 
-* System dependencies
+* Database creation: bundle exec rake db:create
 
-* Configuration
+* Database initialization; bundle exec rake db:migrate
 
-* Database creation
+* How to run the test suite: bundle exec rake
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Services (job queues, cache servers, search engines, etc.): Postgres
