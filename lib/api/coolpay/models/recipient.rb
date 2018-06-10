@@ -18,6 +18,10 @@ module Api
           end
         end
 
+        def self.find(id, token)
+          all(token).find { |recipient| recipient.id == id }
+        end
+
         def save
           body, = Api::Coolpay::Connection.post(URL, { 'recipient' => { 'name' => name } }, @token)
           find_errors(body)
