@@ -1,3 +1,5 @@
+require 'api/coolpay/authentication'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
@@ -16,5 +18,13 @@ class ApplicationController < ActionController::Base
 
   def validate_author(object)
     redirect_back(fallback_location: root_path) unless current_user == object.user
+  end
+
+  def token
+    credentials = current_user.credentials.first
+    token = Api::Coolpay::Authentication.login(credentials.username, credentials.apikey)['token']
+    redirect_back(fallback_location: root_path) if token.empty?
+
+    token
   end
 end

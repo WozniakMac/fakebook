@@ -1,0 +1,12 @@
+= form_tag '/payments' do
+  .field
+    = label_tag :amount
+    = text_field_tag :amount
+  .field
+    = label_tag :currency
+    = text_field_tag :currency
+  .field
+    = label_tag :recipient_id
+    = select_tag :recipient_id, options_for_select(@recipients.collect{ |u| [u.name, u.id] })
+  .actions = submit_tag 'Submit'
+

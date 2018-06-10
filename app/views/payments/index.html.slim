@@ -1,0 +1,21 @@
+h1 Listing payments
+
+table
+  thead
+    tr
+      th Amount
+      th Currency
+      th Recipient
+      th status
+
+  tbody
+    - @payments.each do |payment|
+      tr
+        td = payment.amount
+        td = payment.currency
+        td = payment.recipient.name
+        td = payment.status
+
+br
+
+= link_to 'New payment', new_payment_path

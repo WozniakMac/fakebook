@@ -1,5 +1,4 @@
 require 'api/coolpay/models/recipient'
-require 'api/coolpay/authentication'
 
 class RecipientsController < ApplicationController
   before_action :authenticate
@@ -30,13 +29,5 @@ class RecipientsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def recipient_params
     params.permit(:name)
-  end
-
-  def token
-    credentials = current_user.credentials.first
-    token = Api::Coolpay::Authentication.login(credentials.username, credentials.apikey)['token']
-    redirect_back(fallback_location: root_path) if token.empty?
-
-    token
   end
 end

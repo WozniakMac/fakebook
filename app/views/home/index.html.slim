@@ -7,9 +7,12 @@ h1
 - if current_user
   div
     = "Hi #{current_user.first_name}"
-  dic
+  div
     = link_to 'Coolpay Credentials', :credentials
+  div
     = link_to 'Coolpay Recipients', :recipients
+  div
+    = link_to 'Coolpay Payments', :payments
   div
     = link_to 'Logout', :logout
 
