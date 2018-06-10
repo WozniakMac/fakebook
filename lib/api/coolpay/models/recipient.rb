@@ -11,8 +11,7 @@ module Api
 
         def self.all(token)
           body, = Api::Coolpay::Connection.get(URL, {}, token)
-          recipients = body['recipients'] || [] if body.is_a?(Hash)
-          recipients = [] if body.is_a?(String)
+          recipients = body['recipients'] || []
 
           recipients.map do |recipient|
             Recipient.new(token, recipient)
@@ -20,7 +19,9 @@ module Api
         end
 
         def save
-          Api::Coolpay::Connection.post(URL, { 'recipient' => { 'name' => name } }, @token)
+          body, = Api::Coolpay::Connection.post(URL, { 'recipient' => { 'name' => name } }, @token)
+          find_errors(body)
+          body
         end
       end
     end

@@ -22,7 +22,7 @@ module Api
       def self.get(path, query = {}, token = nil)
         response = api(token).get(path, query)
 
-        [response.body, response.status]
+        [parse_body(response.body), response.status]
       rescue Faraday::ParsingError
         [{ 'error' => 'Invalid response' }, 404]
       end
@@ -33,11 +33,21 @@ module Api
           req.body = body
         end
 
-        [response.body, response.status]
+        [parse_body(response.body), response.status]
       rescue Faraday::ParsingError => e
         puts e
         [{ 'error' => 'Invalid response' }, 404]
       end
+
+      def self.parse_body(body)
+        if body.is_a?(Hash)
+          body
+        else
+          { 'error' => body }
+        end
+      end
+
+      private_class_method :parse_body
     end
   end
 end
